@@ -1,0 +1,20 @@
+Problema #1: Ao tentar digitar o nome do jogador no menu, o terminal pede o nome novamente mesmo depois de digitado.
+
+Motivo do problema: A entrada que pede a variável do nome estava fora do while, o que fazia com que o laço que impedia entradas em branco entrasse em ação. O que fazia com o código pedisse o input de nome duas vezes.
+
+Correção: Posicionado a segunda entrada da variável nome dentro do laço while, para que ele funcione corretamente e peça a segunda entrada apenas dentro da condição determinada.
+
+Problema #2: Ao escolher o nome do jogador e o tipo de atleta, o jogo inicia a partida e anuncia o rival, porém ao tentar iniciar o confronto, ele pede para iniciar novamente.
+
+Motivo do problema: O dicionário do jogador e a chamada que retorna o valor de jogador estavam identados de maneira incorreta.
+
+Correção: identados em paralelo com a função solucionou o fluxo do código.
+
+Problema #3: Só tem como ganhar como atacante e a defesa não tem uma funcionalidade atualmente.
+
+
+Ideias
+
+Ideia #1: um sistema como um pedra,papel e tesoura onde você escolhe uma opção(exemplo: driblar) 
+e o rival também (exemplo: dar um bote) e então quem ganhar gera dano no outro. 
+(pode ter um empate onde os dois levam dano ou só se cancelam.) 

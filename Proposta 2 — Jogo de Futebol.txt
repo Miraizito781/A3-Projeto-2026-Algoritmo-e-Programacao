@@ -1,0 +1,38 @@
+Proposta 2 — Jogo de Futebol
+Conceito
+Um RPG de futebol em turnos. O jogador escolhe um atleta e disputa desafios contra jogadores rivais. As jogadas ofensivas reduzem a resistência do adversário; quando ela chega a zero, o jogador marca um gol, recebe pontos e avança para o próximo rival.
+
+A vida do personagem é apresentada como energia no jogo. Isso mantém a mecânica de pontos de vida exigida pela proposta, com uma explicação que combina com o tema.
+Atletas jogáveis
+Atleta	Energia inicial	Ataque	Defesa
+Atacante	25	10	2
+Meio-campista	30	7	4
+Defensor	36	6	6
+
+
+Atributos diferentes fazem o jogador escolher entre finalizar com mais força, ter mais energia ou reduzir melhor as jogadas rivais.
+Rivais
+Rival	Resistência	Dano de uma jogada
+Marcador	18	4
+Goleiro	25	5
+Capitão adversário	32	7
+
+
+A resistência representa a dificuldade de superar cada rival e marcar contra ele. Cada adversário exige mais esforço que o anterior.
+Como funciona um desafio
+Em cada turno, o jogador escolhe:
+1. Atacar / Finalizar: reduz a resistência do rival pelo valor de ataque do atleta. Se a resistência chegar a zero, marca um gol. Se o rival ainda resistir, ele responde com uma jogada.
+2. Defender: protege o atleta da jogada rival; a defesa reduz a energia perdida.
+3. Recuar: cede a vez para reorganizar a jogada, mas o rival mantém a posse e ataca. O dano recebido não é reduzido pela defesa.
+Cada gol vale 10 pontos, aumenta o nível e leva o atleta ao próximo rival. Depois de marcar, a resistência do novo oponente começa no valor inicial definido para ele.
+Vitória e derrota
+- Vitória: marcar contra os três rivais, somando três gols.
+- Derrota: a energia do atleta chegar a zero antes de concluir o desafio.
+- Desistência: se quiser incluir a opção “Fugir” literalmente, ela pode encerrar o desafio e a partida. “Recuar” continua sendo uma ação tática durante a disputa.
+Menu do jogo
+1. Visualizar status;
+2. Iniciar partida;
+3. Batalhar / Jogar desafio;
+4. Consultar pontuação;
+5. Sair.
+No status, o programa mostra nome do atleta, posição, energia atual e máxima, rival atual, nível, gols e pontuação.
