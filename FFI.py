@@ -27,7 +27,6 @@ def ler_opcao(mensagem, opcoes_validas):
 
 ### - Essa função irá mostrar os tipos de atletas que podem ser escolhidos: Atacante, Meio-Campista e Líbero/Lateral.
 ### - Cada um desses 3 tipos de jogadores possui características que vão interferir diretamente no fluxo dos confrontos que virão.
-### - Os valores mostrados aqui precisam ser os mesmos usados na função criar_jogador().
 def mostrar_atletas():
     print("\nEscolha seu atleta:")
     print("1 - Atacante              | Energia: 25 | Ataque: 10 | Defesa: 2")
@@ -84,11 +83,11 @@ def criar_jogador():
 ### - "estilo" é uma dica mostrada ao jogador para ele aprender como o rival costuma jogar.
 def criar_rivais():
     rivais = [
-        {"nome": "Zagueiro adversário", "resistencia": 18, "dano": 4, "padrao": [3, 3, 1], "turno": 0,
+        {"nome": "Zagueiro adversário", "resistencia": 18, "dano": 4, "padrao": [3, 3, 1, 3, 2, 3], "turno": 0,
          "estilo": "Gosta de marcar e só de vez em quando arrisca um chute."},
-        {"nome": "Goleiro", "resistencia": 25, "dano": 5, "padrao": [1, 3, 2, 3], "turno": 0,
+        {"nome": "Goleiro", "resistencia": 25, "dano": 5, "padrao": [1, 3, 2, 3, 1, 1, 3, 2], "turno": 0,
          "estilo": "Alterna chutes e defesas, com um drible de surpresa."},
-        {"nome": "Capitão do time rival", "resistencia": 32, "dano": 7, "padrao": [1, 2, 3, 1, 2], "turno": 0,
+        {"nome": "Capitão do time rival", "resistencia": 32, "dano": 7, "padrao": [1, 2, 3, 1, 2, 2, 3, 1, 3, 2], "turno": 0,
          "estilo": "Muda de jogada o tempo todo, mas repete uma sequência."}
     ]
     return rivais
@@ -196,25 +195,48 @@ def mostrar_resultado_da_disputa(jogada_vencedora):
 
 ### - Esta função vai atualizar a contagem de gols, a pontuação, o nível e a energia do jogador após vencer um rival.
 def registrar_gol(jogador):
+    # Quantidade de energia que o jogador recupera a cada gol. Para mudar a dificuldade, basta alterar este valor.
+    energia_recuperada = 6
+    energia_antes = jogador["energia"]
+
     jogador["gols"] = jogador["gols"] + 1
     jogador["pontuacao"] = jogador["pontuacao"] + 10
     jogador["nivel"] = jogador["nivel"] + 1
-    jogador["energia"] = jogador["energia"] + 3
+    jogador["energia"] = jogador["energia"] + energia_recuperada
 
     # A energia nunca pode passar do máximo do atleta.
     if jogador["energia"] > jogador["energia_maxima"]:
         jogador["energia"] = jogador["energia_maxima"]
+
+    # Calcula quanto de energia foi realmente recuperado (pode ser menos que o valor acima se o atleta já estava perto do máximo).
+    recuperou = jogador["energia"] - energia_antes
     print("\nGOOOOL! Você venceu o rival e marcou um gol!")
     print("Gols:", jogador["gols"], "| Pontuação:", jogador["pontuacao"])
     print("Você avançou para o nível", jogador["nivel"])
-    print("Recuperou 3 pontos de energia.")
+    if recuperou > 0:
+        print("Recuperou", recuperou, "pontos de energia.")
+    else:
+        print("Sua energia já estava no máximo.")
+
+
+### - Esta função mostra uma linha divisória para separar o menu de jogadas do texto que explica o que aconteceu na rodada.
+def mostrar_divisoria():
+    print("============================================")
+
+
+### - Esta função faz o jogo esperar o jogador apertar Enter, para dar tempo de ler o texto da rodada antes de o menu aparecer de novo.
+def pausar():
+    input("\nPressione Enter para continuar...")
 
 
 ### - Esta função executa uma rodada: o jogador e o rival jogam, a disputa é decidida e o dano é aplicado.
 ### - Quem vence a disputa causa dano; se empatar, as jogadas se anulam e ninguém leva dano.
 def executar_rodada(jogador, rival, jogada_jogador):
     jogada_rival = escolher_jogada_rival(rival)
-    print("\nVocê jogou:", nome_da_jogada(jogada_jogador), "| O rival jogou:", nome_da_jogada(jogada_rival))
+
+    # A divisória separa o menu de jogadas do texto que descreve a rodada.
+    mostrar_divisoria()
+    print("Você jogou:", nome_da_jogada(jogada_jogador), "| O rival jogou:", nome_da_jogada(jogada_rival))
 
     vencedor = descobrir_vencedor(jogada_jogador, jogada_rival)
 
@@ -242,6 +264,9 @@ def executar_rodada(jogador, rival, jogada_jogador):
 
     else:
         print("As jogadas se anularam. Ninguém levou dano.")
+
+    # Segunda divisória: fecha o texto da rodada antes de aparecer o menu seguinte.
+    mostrar_divisoria()
 
 
 ### - Esta função vai executar os turnos até a partida ser vencida, perdida ou abandonada.
@@ -277,6 +302,9 @@ def jogar_desafio(jogador, rivais, indice_rival):
             if jogador["energia"] == 0:
                 print("\nSua energia chegou a zero. Você perdeu a partida.")
                 partida_ativa = False
+
+            # Pausa para o jogador ler o texto da rodada antes do próximo menu.
+            pausar()
 
     return indice_rival, partida_ativa
 
