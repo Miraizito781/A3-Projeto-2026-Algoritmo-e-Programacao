@@ -1,0 +1,22 @@
+alterar os nomes das ações do rival para dar coerência lógica.
+
+sugestão de ewerthon para implementar padrões alternativos para o adversário em prol da variabilidade de ações.
+
+criar funções para o fator replay: criar mais rotas de desafios, contador para a quantidade de copas que o jogador conquistar.
+
+criar conquistas para o jogador por cumprir requisitos específicos (realizou 3 ataques com sucesso em sequência ou fez um gol sem levar dano do adversário)
+
+
+estudar a função random, e tentar aplicar na escolha da ação do adversário, para aumentar a variabilidade
+
+separar a criação de personagem do menu de iniciar a partida
+
+não apresentar para o usuário opções que estejam indisponíveis
+
+uma forma de armazenar o progresso do jogador atual
+
+
+
+
+
+
